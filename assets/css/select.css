@@ -1,0 +1,17 @@
+.custom-select {
+   width: 200px; /* Điều chỉnh chiều rộng của dropdown nếu cần */
+   position: relative;
+}
+
+.custom-select select {
+   padding-right: 30px; /* Tạo không gian cho biểu tượng */
+}
+
+.custom-select::after {
+   content: "\f16a"; /* Mã biểu tượng Font Awesome */
+   font-family: 'Font Awesome 5 Brands'; /* Tên font icon */
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
+}

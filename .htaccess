@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?controller=$1
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ index.php?controller=$1&page=$2
+RewriteRule ^export/pdf$ pages/order/Export_pdf.php

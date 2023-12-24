@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<input type="text" name="title" id="title">
+
+<textarea name="content" id="content" cols="30" rows="10"></textarea>
+
+<input type="text" name="category" id="category">
+
+<input type="text" name="tags" id="tags">
+
+<button type="button" id="submit"></button>
+    
+
+
+<script>
+    $(document).ready(function () {
+        // Bắt sự kiện khi người dùng click vào button
+         $('#login').click(function (e) {
+             // Ngăn không cho load lại trang
+             e.preventDefault();
+             //Lấy giá trị của 2 ô input
+             let title = $('#title').val(),
+             content = $('#content').val(),
+             category  = $('#category').val(),
+             tags  = $('#tags').val();
+             // Gửi request 
+             $.ajax({
+                url: '/pages/authenticate/Action.php?act=login',
+                type: 'POST',
+                data: {
+                    title,
+                    content,
+                    category,
+                    tags
+                },
+                 // Nếu thành công thì hiển thị kết quả ra trình duyệt
+                 success: function (response) {
+                    let res = JSON.parse(response);
+                    $('#result').html(`<div class="alert alert-${res.type}" role="alert">${res.message}</div>`);
+                    $('#result').fadeIn('slow', function(){
+                        $('#result').delay(5000).fadeOut();
+                    });
+                    if(res.type == "success"){
+                        $("#login_form")[0].reset();
+                        window.setTimeout(function(){
+                            //Chuyển trang qua trang chủ
+                            window.location.href = "/";
+                        }, 1500);
+                    }
+                 },
+                 error: function (error) {
+                    console.log(error);
+                 }
+             });
+         });
+    });
+</script>
+</body>
+</html>
